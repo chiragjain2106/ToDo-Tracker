@@ -1,0 +1,119 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script> 
+ <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+ <mat-toolbar color="primary">
+    <mat-toolbar-row>
+        
+        <a (click)="sidenav.toggle()"><img
+                  id="logo"
+                  src="https://dl.hiapphere.com/data/thumb/202101/com.tasks.android_HiAppHere_com_icon.png"
+              ></a>
+      <span>todo</span>
+      <h1 style="margin-left: 30%; color: white; text-transform: uppercase;">WELCOME {{userData.username}}</h1>
+     <!-- &nbsp; is {{message3.length}} -->
+     <button mat-button style="width: 10%; position: relative; left: 38%;" (click)="enableAutoCompletion()">
+        <mat-icon
+        class="material-icons-outlined"
+          matTooltip="Enable or Disable Notification"  color="warn"
+          > notifications</mat-icon >
+      </button>
+
+      <button mat-button style="width: 10%; position: relative; left: 36%;" [matMenuTriggerFor]="beforeMenu2" >
+        <mat-icon
+        matBadge="{{message3.length}}" matBadgeColor="primary"
+          matTooltip="Set Task Priority"  color="accent"
+          > notifications</mat-icon >
+      </button>
+      <!-- <mat-icon color="warn">notifications</mat-icon> -->
+      <mat-menu #beforeMenu2="matMenu" yPosition="below" style="width: 90%;" >
+        Task <mat-option *ngFor=" let message of message3">
+           {{message.taskTitle}} 
+        </mat-option> 
+       &nbsp;&nbsp; is completed and moved to archive  &nbsp;&nbsp;   
+      </mat-menu> 
+        
+        <div style="margin-right:10px; margin-left: 36%;" matTooltip="User Profile">
+            <button mat-button [matMenuTriggerFor]="beforeMenu" >
+            <a *ngIf="messages.userImage.length>1000"><img
+                id="logo"
+                src="{{messages.userImage}}"
+                style="border-radius: 50%;"
+         ></a>
+         <a *ngIf="messages.userImage.length<1000"><img
+            id="logo"
+            src="assets/images/default.png"
+            style="border-radius: 50%;"
+     ></a>
+         <!-- <img src="assets/images/default.png" alt="img1" width="25%"> -->
+        </button>
+       
+      
+    </div>
+        <mat-menu #beforeMenu="matMenu" yPosition="below">
+          <button mat-raised-button (click)="addProfileImage()" style="max-width: 80%;" >
+            <img *ngIf="messages.userImage.length>1000" src="{{messages.userImage}}"   width="80%" style="border-radius: 30%; " >
+            <img  *ngIf="messages.userImage.length<1000" src="assets/images/default.png"   width="30%" style="margin-left: 0%; " >
+             <span><mat-icon (click)="openDialog()" matTooltip="Change Profile Image">add_a_photo</mat-icon></span>
+        <!-- <div style="display: none;" id="addImagediv">
+             <input type="file"  (change)="selectFile1($event)"> 
+            <button mat-raised-button color="warn" (click)="sumbitImage1()"> UPLOAD </button>  
+        </div> -->
+
+        </button>
+            <br> <br> 
+            <mat-card-title  style="text-align: center;" > {{userData.username}} </mat-card-title>
+            <br> 
+         <mat-card-title style="text-align: center;" > {{email}} </mat-card-title>
+         <br>
+         <mat-card-title style="text-align: center;">
+            <button mat-button color="primary" (click)="openDialogChangePassword()" >Change Password</button>
+         </mat-card-title> 
+         <br>
+        <mat-card-title style="text-align: center;">
+            <button mat-raised-button color="warn" (click)="logoutUser()" matTooltip="Log Out">Log Out</button> </mat-card-title> 
+        </mat-menu>
+    </mat-toolbar-row>
+</mat-toolbar>  
+
+
+
+<mat-drawer-container class="example-container" style="background-color: white;" >
+    <mat-drawer  #sidenav mode="side" [(opened)]="opened" (opened)="events.push('open!')"
+    (closed)="events.push('close!')" style="background-color: lightblue;width:200px; color:white;" >
+       
+        <br> <br>
+        <button mat-raised-button color="primary"  (click)="doRoute()">
+            <mat-icon class="material-icons-outlined">visibility</mat-icon>
+            Show Tasks</button>
+            <br>
+            <br> <br>
+     <button mat-raised-button color="primary"  routerLink="notes">
+        <mat-icon class="material-icons-outlined">description</mat-icon>
+        Notes</button>
+        <br>
+        <br>
+        <br>
+        <button mat-raised-button color="primary" routerLink="reminder" > 
+            <mat-icon class="material-icons-outlined">notifications</mat-icon> Remainder
+        </button>
+        <br>
+        <br>
+        <br>
+        <!-- <button mat-raised-button color="primary" >
+            <mat-icon class="material-icons-outlined">label</mat-icon> Label</button>
+        <br>
+        <br> -->
+        <button mat-raised-button color="primary"  routerLink="archive">  <mat-icon class="material-icons-outlined">archive</mat-icon> Archive</button>
+        </mat-drawer>
+    <mat-drawer-content style="background-color: palegreen;"> 
+    
+        <ul *ngFor="let data of userData" >
+            <li>{{data.taskTitle}}</li>  
+            <li>{{data.taskId}}</li> 
+            <li>{{data.taskDescription}}</li>   
+        </ul> 
+
+            <router-outlet></router-outlet>
+        </mat-drawer-content>
+    </mat-drawer-container>
+  

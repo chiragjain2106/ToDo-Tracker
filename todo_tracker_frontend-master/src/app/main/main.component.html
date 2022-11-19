@@ -1,0 +1,111 @@
+<nav id="navbarExample" class="navbar navbar-expand-lg fixed-top navbar-light" aria-label="Main navigation">
+    <div class="container">
+  
+      
+        <a routerLink="/"><img id="logo" src="https://dl.hiapphere.com/data/thumb/202101/com.tasks.android_HiAppHere_com_icon.png" alt="logo"> </a>
+         <a class="navbar-brand logo-text" style="color: #3267e4;" routerLink="/">todo</a> 
+  
+        <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ms-auto navbar-nav-scroll">
+                
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/login">Log In</a>
+                </li>
+                
+            </ul>
+            <span class="nav-item">
+                <a class="btn-solid-sm"   routerLink="/register">Let's Start</a>
+            </span>
+        </div> 
+    </div> 
+  </nav>
+  
+  <header id="header" class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-xl-5">
+                <div class="text-container">
+                    <h2 class="h1-large">Organize your work and life, finally.</h2>
+                    <h1 >Delightfully simple and deceptively powerful task management.</h1>
+                    <p class="p-large">Become focused, organized, and calm with todo. Add your tasks.
+                        Organize your life. Achieve more. </p>
+                    <a class="btn-solid-lg" routerLink="/register">Let's Start</a>
+                </div>
+            </div> 
+            <div class="col-lg-6 col-xl-7">
+                <div class="image-container">
+                    <img class="img-fluid" src="assets/images/details-1.png" alt="alternative" style="margin-bottom: 130px;"   />
+                </div> 
+            </div> 
+        </div> 
+    </div> 
+  </header> 
+  <div class="footer bg-gray">
+    <img class="decoration-circles" src="assets/images/decoration-circles.png" alt="alternative" />
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                
+                <div class="social-container">
+                    <span class="fa-stack">
+                        <a routerLink="/">
+                            <i class="fas fa-circle fa-stack-2x"></i>
+                            <i class="fab fa-facebook-f fa-stack-1x"></i>
+                        </a>
+                    </span>
+                    <span class="fa-stack">
+                        <a routerLink="/">
+                            <i class="fas fa-circle fa-stack-2x"></i>
+                            <i class="fab fa-twitter fa-stack-1x"></i>
+                        </a>
+                    </span>
+                    <span class="fa-stack">
+                        <a routerLink="/">
+                            <i class="fas fa-circle fa-stack-2x"></i>
+                            <i class="fab fa-pinterest-p fa-stack-1x"></i>
+                        </a>
+                    </span>
+                    <span class="fa-stack">
+                        <a routerLink="/">
+                            <i class="fas fa-circle fa-stack-2x"></i>
+                            <i class="fab fa-instagram fa-stack-1x"></i>
+                        </a>
+                    </span>
+                    <span class="fa-stack">
+                        <a routerLink="/">
+                            <i class="fas fa-circle fa-stack-2x"></i>
+                            <i class="fab fa-youtube fa-stack-1x"></i>
+                        </a>
+                    </span>
+                </div> 
+            </div> 
+        </div>
+    </div> 
+  </div> 
+  <div class="copyright bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <p class="p-small statement">Copyright © <a routerLink="/">Team - 3</a></p>
+            </div> 
+  
+        </div> 
+    </div> 
+  </div>
+  
+  <button id="myBtn">
+    <img src="assets/images/up-arrow.png" alt="alternative" />
+  </button>
+  <!-- <mat-form-field appearance="fill">
+    <mat-label>Choose a date</mat-label>
+    <input matInput [matDatepicker]="picker">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <button (click)="myFunction()">btn</button> -->
+  

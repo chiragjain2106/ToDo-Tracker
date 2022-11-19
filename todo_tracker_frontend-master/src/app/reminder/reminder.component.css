@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");  
+ .mat-card-image
+{
+   margin-left: 1%;
+   width: 100%;
+   height: 20%;
+} 
+.example-card
+{
+    height: min-content;
+    max-width: 310px;
+    /* max-height: 300px; */
+    margin: 1%;
+    margin-left: 7%;
+}
+
+.example-card-add
+{
+   max-width: 800px;
+   margin-left: 24%;
+   margin-top: 3%;
+   border:1px solid black;
+}
+
+ .mat-button{
+    margin-right: -5%;
+}
+
+.container .btndel {
+    position: absolute;
+    top: 2%;
+    left: 87%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: rgb(255, 255, 255);
+    color: #555;
+    padding: 0.1px 0.1px;
+    border: none;
+  }
+  
+  #titleinput{
+   font-size: larger;
+   font-weight:500;
+   border: none;
+   outline: none;
+   border-width:0 px;
+   width: 80%;
+ }
+
+ .taskbtn{
+   display:inline-block;
+ } 

@@ -1,0 +1,64 @@
+<div style="text-align: center"></div>
+<div class="container">
+  <div class="card card0">
+    <div class="d-flex flex-lg-row flex-column-reverse">
+      <div class="card card1">
+        <div class="row justify-content-center my-auto">
+          <div class="col-md-8 col-10 my-5">
+            <div class="row justify-content-center px-3 mb-3">
+              <a routerLink="/"
+                ><img
+                  id="logo"
+                  src="https://dl.hiapphere.com/data/thumb/202101/com.tasks.android_HiAppHere_com_icon.png"
+              /></a>
+            </div>
+            <h1 style="color: #c76de3">Welcome to Todo Tracker</h1>
+
+            <h3 class="msg-info" style="margin-left: -8px">
+              Login to your account
+            </h3>
+            <form
+              fxLayoutAlign="stretch"
+              fxLayout="column"  #loginform="ngForm" (ngSubmit)="logInUser(loginform.value)"
+            >
+            <label class="form-control-label text-muted">Email </label>
+            <input
+            matInput type="email"  #ngModel placeholder="Registered Email" name="email" [(ngModel)]="credentials.email" required email ngModel
+            />
+
+            <label class="form-control-label text-muted">Password</label>
+            <input matInput type="password" #ngModel placeholder="Password" name="password" [(ngModel)]="credentials.password" required password ngModel>
+
+            <div class="row justify-content-center px-3">
+              <button class="btn-block btn-color"
+              [disabled]="!loginform.valid">Login</button>
+            </div></form>
+          </div>
+        </div>
+        <div class="text-center">
+          <p class="sm-text">
+            Don't have an account?
+            <button class="btn btn-white ml-2" [routerLink]="['/register']">
+              Register
+            </button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-5 d-none d-md-block">
+    <img
+      src="assets/images/login.gif"
+      alt="login form"
+      class="img-fluid"
+      width="30%"
+      style="
+        border-radius: 1rem 1rem 1rem 1rem;
+        position: absolute;
+        left: 60%;
+        top: 5%;
+        height: 90%;
+      "
+    />
+  </div>
+</div>

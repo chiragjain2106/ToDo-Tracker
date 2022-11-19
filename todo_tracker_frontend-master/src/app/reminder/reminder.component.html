@@ -1,0 +1,34 @@
+<div class="row"  >
+   <div style="margin-top: 6%; margin-left: 30%;" *ngIf="message==''">
+      <img src="assets/images/remind.png" alt="No Archieved Task" width="50%" height="80%">
+   </div>
+    <mat-card   class="example-card" *ngFor="let task of message" matRipple [matRippleCentered]="centered">
+       
+        <mat-card-title>  {{task.taskTitle}} 
+         <img
+         matTooltip="Priority"
+         src="assets/images/{{ task.priority }}.png"
+         alt=""
+         width="10%"
+         style="margin-left: 5%; position: relative"
+       />   
+      </mat-card-title>
+        <mat-card-subtitle>   {{task.taskDescription}}  </mat-card-subtitle>
+        <mat-card-subtitle mat-card-image>   <img src="{{task.taskImage}}" alt=""> </mat-card-subtitle>
+     
+      <mat-chip *ngIf="task.category!=''">
+         {{task.category}}
+       </mat-chip>
+       <br>
+        <mat-card-title style="color: rgb(255, 0, 0); font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: larger; font-weight: bolder; "> <strong>Reminder: </strong> Today's Task </mat-card-title>
+        <mat-card-subtitle style="color: rgb(255, 0, 0); font-size: larger; font-weight: bolder; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">  {{task.date}} </mat-card-subtitle>
+      
+     <mat-card-actions>
+        <!-- <button mat-button><mat-icon class="material-icons-outlined" >archive</mat-icon></button>
+        <button mat-button><mat-icon class="material-icons-outlined" >notifications</mat-icon></button>
+        <button mat-button><mat-icon class="material-icons-outlined" >add_a_photo</mat-icon></button>
+        <button mat-button><mat-icon class="material-icons-outlined" >vert_more</mat-icon></button> -->
+     </mat-card-actions>    
+    </mat-card>
+    </div>
+    

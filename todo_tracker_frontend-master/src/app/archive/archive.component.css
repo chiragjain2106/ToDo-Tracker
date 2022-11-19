@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");  
+.mat-card-image
+{
+   margin-left: 1%;
+   width: 100%;
+
+} 
+.example-card
+{
+    height: max-content;
+    max-width: 300px;
+    margin: 1%;
+    margin-left: 4%;
+}

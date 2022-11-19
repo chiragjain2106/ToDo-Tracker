@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");  
+ .mat-card-image
+{
+   margin-left: 1%;
+   width: 100%;
+   height: 20%;
+} 
+
+.example-card
+{
+    height: min-content;
+    max-width: 300px;
+    position: relative;
+    margin-top: 0.5%;
+    margin-bottom: 0.5%;
+    margin-left: 2%;
+    background-color: lightblue;
+}
+
+.example-card1
+{
+   height: min-content;
+   max-width: 400px;
+   position: relative;
+   margin-top: 0.5%;
+   margin-bottom: 0.5%;
+   margin-left: 35%;
+   background-color: lightblue;
+}
+
+[hidden] {
+   display: none !important;
+ }
+
+::ng-deep.mat-menu-panel {
+   max-width: none !important;
+ }
+
+/* ::ng-deep .mat-autocomplete-panel{
+   position: fixed important;
+   margin-top:250%; 
+   left: 600%;
+   border: 3px solid #73AD21;
+   background-color: palegreen !important;
+ }  */
+
+input{
+   outline: none;
+   border: none;
+}
+
+textarea{
+   outline: none;
+   border: none;
+   resize: none;
+}
+
+.example-card-add
+{
+   max-width: 400px;
+   margin-left: 35%;
+   margin-top: 3%;
+   border:1px solid black;
+}
+
+ .mat-button{
+    margin-right: -5%;
+}
+
+.container .btndel {
+    position: absolute;
+    top: 2%;
+    left: 87%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: rgb(255, 255, 255);
+    color: #555;
+    padding: 0.1px 0.1px;
+    border: none;
+  }
+  
+  #titleinput{
+   font-size: larger;
+   font-weight:500;
+   border: none;
+   outline: none;
+   border-width:0 px;
+   width: 80%;
+ }
+
+ .example-chip-list {
+   width: 100%;
+ }
+ 

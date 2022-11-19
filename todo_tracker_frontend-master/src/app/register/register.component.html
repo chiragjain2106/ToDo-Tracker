@@ -1,0 +1,120 @@
+<h1 style="position: relative; left: 15%; width: 30%">
+  &nbsp; &nbsp; 
+</h1>
+<div style="text-align: center">
+<div class="container  mx-auto">
+  <div class="card card0">
+    <div class="d-flex flex-lg-row flex-column-reverse">
+      <div class="card card1">
+        <div class="row justify-content-center my-auto">
+          <div class="col-md-8 col-10">
+
+            <div class="row justify-content-center">
+                <a routerLink='/'><img id="logo" src="https://dl.hiapphere.com/data/thumb/202101/com.tasks.android_HiAppHere_com_icon.png"></a>
+            </div>
+
+            <h1 style="color: #c76de3;">Welcome to Todo Tracker</h1>
+
+            <h3 class="msg-info" style="margin-left: -8px;">Register Yourself</h3>
+
+            <div>
+              <label class="form-control-label text-muted">Add Profile Image</label>
+              <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
+              
+              <div  ><img  [src]="url" *ngIf="url" width="20%"></div>
+              <p>
+                <input type="file" [(ngModel)]="user1.userImage" (change)="selectFile($event)">
+              </p>
+            </div>
+
+            <!-- <div>{{url_size}}</div>  -->
+
+            <div class="form-group">
+              <label class="form-control-label text-muted">Username</label>
+              <input type="text"  [(ngModel)]="user1.username" [formControl]="username" pattern="^[a-zA-Z \s]{8,15}$" id="username" name="username" placeholder="Enter Username" class="form-control">
+              <mat-error *ngIf="username.hasError('pattern') && !username.hasError('required')">
+                  Please enter a valid User Name </mat-error>
+                <mat-error *ngIf="username.hasError('required') &&  username.touched">
+                  user Name is <strong>required</strong> </mat-error>
+          </div>
+            
+
+             <div class="form-group">
+              <label class="form-control-label text-muted">Mobile Number</label>
+              <input type="text"  [(ngModel)]="user1.mobileNo" [formControl]="mobileNo" pattern="^[0-9]{10,12}$" id="mobileNo" name="password" placeholder="Ex-96....." class="form-control">
+              <mat-error *ngIf="mobileNo.hasError('pattern') && !mobileNo.hasError('required')">
+                  Please enter a valid Mobile Number Only digits are allowed   </mat-error>
+                <mat-error *ngIf="mobileNo.hasError('required') &&  password.touched">
+                  Mobile No is <strong>required</strong>   </mat-error> 
+          </div>
+
+            <div class="form-group">
+              <label class="form-control-label text-muted">Email</label>
+              <input type="email" matInput [(ngModel)]="user1.email"  [formControl]="email" placeholder="Ex. pat@example.com">
+              <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
+                Please enter a valid email address </mat-error>
+              <mat-error *ngIf="email.hasError('required')  &&  email.touched">
+                Email is <strong>required</strong>  </mat-error>
+                <mat-error *ngIf="email.valueChanges && !email.hasError('required') && !email.hasError('email')">
+                 <div emailStatus></div>
+                   <strong>{{availablity}}</strong>  </mat-error>
+             </div>
+
+             <div class="form-group">
+              <label class="form-control-label text-muted">Password</label>
+              <input type="password"  [(ngModel)]="user1.password" [formControl]="password" pattern="^[A-Za-z0-9@*]{8,15}$" id="movieUser.password" name="password" placeholder="Password" class="form-control">
+              <mat-error *ngIf="password.hasError('pattern') && !password.hasError('required')">
+                  Please enter a valid Password Only @,* special Chraracters,digits, (lowercase,uppercase Alphabets) are allowed   </mat-error>
+                <mat-error *ngIf="password.hasError('required') &&  password.touched">
+                  Password is <strong>required</strong>   </mat-error>      
+          </div>
+
+         <img  src="{{messages.userImage}}" alt="" width="20%">
+          <!-- <div class="row justify-content-center my-3 px-3">
+            <button class="btn-block btn-color" (click)="showUser()"> user Image </button>
+          </div> -->
+
+            <div class="row justify-content-center my-3 px-3">
+              <button class="btn-block btn-color" (click)="registerNow()" >
+                Create New Account
+              </button>
+            </div>
+
+            <!-- <div
+              style="position: absolute; top: 49%; left: 32%"
+              class="row justify-content-center my-3 px-3"
+            >
+              <button class="btn-block btn-color" >
+                Email Availablity
+              </button>
+               {{availablity}} 
+            </div> -->
+
+            <div class="row justify-content-center my-3 px-3">
+              <button class="btn-block btn-color" routerLink="/login">
+                Login
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<div class="col-md-6 col-lg-7 d-none d-md-block">
+  <img
+    src="assets/images/signup.gif"
+    alt="login form"
+    class="img-fluid"
+    width="30%"
+    style="
+      border-radius: 1rem 1rem 1rem 1rem;
+      position: absolute;
+      left: 60%;
+      top: 5%;
+      height: 90%;
+    "
+  />

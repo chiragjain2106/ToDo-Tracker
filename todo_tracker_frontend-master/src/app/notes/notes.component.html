@@ -1,0 +1,590 @@
+<!-- <mat-paginator [length]="10"
+              [pageSize]="0.5"
+              [pageSizeOptions]="[1,3,5, 10, 25, 100]"
+              aria-label="Select page">
+hello how are you
+            </mat-paginator> -->
+           
+<br>
+<button mat-raised-button color="warn" style="margin-left: 90%;" (click)="changeView()" >change View</button>
+<div class="container">
+
+  <div class="row">
+    
+    <div id="custom-search-input">
+      
+      <div
+        class="input-group col-md-12"
+        style="text-align: center; width: 450px; margin-left: 300px"
+      >
+      <button mat-raised-button color="warn" [matMenuTriggerFor]="animals" style="position:absolute; top: 0%;left: -30%;">Searching Options</button>
+<mat-menu #animals="matMenu">
+  <button mat-menu-item (click)="search('Enter Title to search')">Title</button>
+  <button mat-menu-item (click)="search('Enter Description to search')">Description</button> 
+  <mat-form-field class="example-chip-list" appearance="legacy">
+    &nbsp;&nbsp;  <mat-label>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Category</mat-label>
+    <mat-chip-list #chipList aria-label="Fruit selection">
+      <input
+        placeholder="New fruit..."
+        #fruitInput
+        [formControl]="fruitCtrl"
+        [matAutocomplete]="auto"
+        [matChipInputFor]="chipList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        (matChipInputTokenEnd)="add($event)"
+        >
+    </mat-chip-list>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="label1($event)">
+      <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+        {{fruit}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <button mat-menu-item [matMenuTriggerFor]="priority">Priority</button>
+</mat-menu>
+
+<mat-menu #priority="matMenu">
+  <button mat-menu-item (click)="searchbyPriority('low')">Low</button>
+  <button mat-menu-item (click)="searchbyPriority('medium')">Medium</button>
+  <button mat-menu-item (click)="searchbyPriority('high')">High</button>
+</mat-menu>
+
+        <input
+          type="text"
+          class="search-query form-control"
+          placeholder={{category2}}
+          name="email"
+          [(ngModel)]="category1"
+        />
+        <span class="input-group-btn">
+          <button
+            (click)="category(category1)"
+            class="btn btn-danger"
+            type="button"
+            matTooltip="Search"
+          >
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </span>
+        <button
+          mat-raised-button
+          color="primary"
+          id="openForm"
+          (click)="openForm()"
+          matTooltip="Add A New Task"
+        >
+          + Add Task
+        </button>
+      
+       </div> 
+      
+    </div>
+    
+  </div>
+</div>
+
+
+
+<mat-form-field
+  matTooltip="Search Task By A Particular Date"
+  style="width: 10%; margin-left: 32%"
+  class="example-full-width"
+  appearance="fill"
+>
+  <mat-label>Choose a Date</mat-label>
+  <input
+    matInput
+    [matDatepicker]="picker"
+    [(ngModel)]="task1.date"
+  />
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+&nbsp;&nbsp;
+
+<button
+  matTooltip="Search Task By A Particular Date"
+  mat-raised-button
+  color="primary"
+  (click)="searchTaskByDates(task1.date)"
+>
+  Task By Date</button
+>
+
+<!-- <table matSort (matSortChange)="sortData($event)"  style="width: 10%; margin-left: 50%;position: relative;top: -8%;">
+  <tr> <th mat-sort-header="priority">Sort By Priority</th>
+    <th mat-sort-header="date">Sort By Date</th></tr></table> -->
+<button mat-raised-button color="warn" [matMenuTriggerFor]="sort" >Sort Tasks</button>
+<mat-menu #sort="matMenu" >
+  
+<table matSort (matSortChange)="sortData($event)">
+  <tr>
+    <!-- <th mat-sort-header="priority">Priority</th> -->
+    <th> <button
+      matTooltip="Sort Task By Priority"
+      mat-menu-item
+     style="font-weight: bolder;"
+     [matMenuTriggerFor]="priority1"
+    >
+      Priority
+    </button> </th>
+    <mat-menu #priority1="matMenu">
+    <button
+  matTooltip="Sort Task By Priority"
+  mat-menu-item
+ style="font-weight: bolder;"
+  (click)="sortTaskByPriority('a')"
+>
+  Low->High
+</button>
+ <button
+  matTooltip="Sort Task By Priority"
+  mat-menu-item
+ style="font-weight: bolder;"
+  (click)="sortTaskByPriority('d')"
+>
+  High->Low
+</button> 
+</mat-menu>
+    <th mat-sort-header="date">Date</th>
+    <th mat-sort-header="title">Title</th>
+    <th mat-sort-header="description">Description </th>
+    <th mat-sort-header="category">Category </th>
+  </tr></table>
+  <!-- <button
+  matTooltip="Sort Task By Date"
+  mat-button
+
+  (click)="sortTaskByDates()"
+>
+  By Date
+</button> -->
+<!-- <button
+  matTooltip="Sort Task By Priority"
+  mat-button
+ style="font-weight: bolder;"
+  (click)="sortTaskByPriority()"
+>
+  Priority
+</button> -->
+</mat-menu>
+
+
+<mat-card class="example-card-add" id="addTaskForm" style="display: none; width: 50%;">
+    <mat-card-title>
+      <input
+        type="text"
+        placeholder="Title"
+        [formControl]="addTitle"
+        [(ngModel)]="task1.taskTitle"
+        style="border: 0 px"
+        class="form-control"
+        appearance="fill"
+      />
+    </mat-card-title>
+    <mat-error *ngIf="addTitle.hasError('required') && addTitle.touched">
+      Title is <strong>required</strong>
+    </mat-error>
+
+    <mat-card-subtitle>
+      <textarea
+      
+        type="text"
+        placeholder="Take a Note ....."
+        [formControl]="addDes"
+        [(ngModel)]="task1.taskDescription"
+        class="form-control"
+        appearance="legacy"
+      ></textarea>
+      <mat-error *ngIf="addDes.hasError('required') && addDes.touched">
+        Description is <strong>required</strong>
+      </mat-error>  </mat-card-subtitle>
+      <mat-label>Choose Date</mat-label>  <br>
+      <button mat-raised-button style="width: 20%;"> Today   </button>
+        <br>
+      <input style="margin-left: 2%; width: 27%;" matInput [matDatepicker]="picker" [(ngModel)]="task1.date"  placeholder="{{task1.date}}" /> 
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker> 
+
+    <div class="row">
+      <button
+        mat-raised-button
+        id="addtaskbtn"
+        color="warn"
+        (click)="submitData()"
+        matTooltip="Add task"
+        style="width: 10%; margin-left: 2%"
+      >
+        + Add
+      </button>
+      &nbsp;&nbsp;
+      <button
+        mat-raised-button
+        id="addtaskbtn"
+        color="primary"
+        (click)="closeAddDiv()"
+        matTooltip="Close"
+        style="width: 10%"
+      >
+        Close
+      </button>
+    </div>
+</mat-card>
+
+  <!-- <table matSort (matSortChange)="sortData($event)">
+          <tr> 
+            <th mat-sort-header="priority">Title</th>
+            <th mat-sort-header="priority">Description/th>
+            <th mat-sort-header="priority">category</th>
+            <th mat-sort-header="priority">Priority</th>
+            <th mat-sort-header="date">Date</th></tr>
+            <tr *ngFor="let dessert of message1">
+              <td>{{dessert.taskTitle}}</td>
+              <td>{{dessert.taskDescription}}</td>
+              <td>{{dessert.category}}</td>
+              <td>{{dessert.priority}}</td>
+              <td>{{dessert.date}}</td>
+            </tr>
+          </table> -->
+
+
+<div class="row">
+  <div *ngIf="message1==null" style="margin-left: 40%; margin-top: 12%;">
+    <h1> <mat-icon class="material-icons-outlined">lightbulb</mat-icon>
+   Notes you add appear here </h1> 
+  </div>
+
+
+  <mat-card 
+    matRipple
+    [matRippleCentered]="centered"
+    class="example-card"
+    [class.example-card1]="change==1"
+    id="matCard"
+    *ngFor="let task of message1 
+    | paginate:{itemsPerPage:6, currentPage:page, totalItems:totalLength}"
+    
+   style="background-color: {{task.cardColor}}; "
+  >
+    <div>
+      <mat-card-title>
+        <div *ngIf="task.taskId != taskId1" [ngStyle]="{'background-color':task.taskTitle == category1 ? 'yellow' : '' }">
+          {{ task.taskTitle }}
+          <img
+          [ngStyle]="{'background-color':task.priority == category1 ? 'blue' : '' }"
+          matTooltip="Priority"
+          src="assets/images/{{ task.priority }}.png"
+          alt=""
+          width="10%"
+          style="margin-left: 5%; position: relative"
+        />
+        </div>
+        <div *ngIf="task.taskId == taskId1">
+          <img
+            matTooltip="Priority"
+            src="assets/images/{{ task.priority }}.png"
+            alt=""
+            width="10%"
+            style="margin-left: 5%; position: relative"
+          />
+          <input
+            id="titleinput"
+            type="text"
+            placeholder=""
+            [(ngModel)]="task1.taskTitle"
+            class="form-control"
+            appearance="fill"
+          />
+        </div>
+      </mat-card-title>
+
+      <mat-card-subtitle>
+        <div *ngIf="task.taskId != taskId1"  [ngStyle]="{'background-color':task.taskDescription === category1 ? 'yellow' : '' }">{{ task.taskDescription }}</div>
+        <div *ngIf="task.taskId == taskId1">
+          <textarea
+            type="text"
+            placeholder=""
+            [(ngModel)]="task1.taskDescription"
+            style="border: none; outline: none; resize: none"
+            class="form-control"
+            appearance="legacy"
+          ></textarea>
+        </div>
+      </mat-card-subtitle>
+
+      <div
+        class="container"
+        *ngIf="task.taskImage.length > 1000"
+        style="position: relative"
+      >
+        <img
+          *ngIf="task.taskImage.length > 1000"
+          mat-card-image
+          src="{{ task.taskImage }}"
+        />
+        <button class="btndel" (click)="deleteImage(task.taskId)">
+          <mat-icon  matTooltip="Delete Task Image">delete</mat-icon>
+        </button>
+      </div>
+
+      <mat-chip-list 
+        *ngIf="task.category != ''"
+        #chipList
+        aria-label="Fruit selection"
+      >
+        <mat-chip  (removed)="remove(task.category)"  [ngStyle]="{'background-color':task.category === category1 ? 'yellow' : '' }">
+          {{ task.category }}
+          <button matChipRemove (click)="deleteLabel(task.taskId)">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+      </mat-chip-list>
+      <br />
+      <mat-card-subtitle>
+        <div *ngIf="task.taskId != taskId1">
+          <strong> {{ task.date }}</strong>
+        </div>
+        <div *ngIf="task.taskId == taskId1">
+          <!-- <mat-icon>query_builder</mat-icon> -->
+          <input
+            style=" width: 40%"
+            matInput
+            [matDatepicker]="picker2"
+            [(ngModel)]="task1.date"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker2"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </div>
+      </mat-card-subtitle>
+
+      <button
+        mat-raised-button
+        color="warn"
+        id="updatebtn"
+        style="margin-left: 70%"
+        *ngIf="task.taskId == taskId1"
+        (click)="updateUserTask1()"
+      >
+        Update
+      </button>
+
+      <mat-card-actions >
+        <button
+          mat-button
+          color="primary"
+          style="position: relative; left:-5%"
+          matTooltip="Archieve Task"
+          (click)="archiveTasks(task.taskId)"
+        >
+          <mat-icon class="material-icons-outlined">archive</mat-icon>
+        </button>
+
+        <mat-menu #beforeMenu1="matMenu" yPosition="below">
+          <input
+            style="width: 40%; margin-left: 11%"
+            [min]="todayDate"
+            matTooltip="Change Task Date"
+            matInput
+            [matDatepicker]="picker1"
+            [(ngModel)]="task1.date"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker1"
+            matTooltip="Change Task Date"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-menu>
+
+        
+        <button mat-button style="width: 10%; position: relative; left:-10%" [matMenuTriggerFor]="beforeMenu2" >
+
+          <!-- <img src="assets/images/p5.webp" alt="" width="100%">  -->
+           <mat-icon
+            class="material-icons-outlined"
+            matTooltip="Set Task Priority"  color="primary"
+            > flag</mat-icon 
+          > 
+        </button>
+        <mat-menu #beforeMenu2="matMenu" yPosition="below">
+          <div>
+            <img
+              src="assets/images/high.png"
+              alt=""
+              width="15%"
+              style="margin-left: 15%"
+            />
+            <button mat-button color="warn" (click)="high('high', task.taskId)">
+              HIGH
+            </button>
+            <!-- <mat-icon>priority_high</mat-icon> -->
+          </div>
+
+          <div>
+            <img
+              src="assets/images/medium.png"
+              alt=""
+              width="15%"
+              style="margin-left: 15%"
+            />
+            <button
+              mat-button
+              style="color: #fcac04"
+              (click)="medium('medium', task.taskId)"
+            >
+              MEDIUM
+            </button>
+          </div>
+
+          <div>
+            <img
+              src="assets/images/low.png"
+              alt=""
+              width="15%"
+              style="margin-left: 15%"
+            />
+            <button
+              mat-button
+              style="color: green"
+              (click)="low('low', task.taskId)"
+            >
+              LOW
+            </button>
+            <!-- <span class="material-icons">low_priority</span> -->
+          </div>
+
+          <!-- <h1>{{ priority }}</h1> -->
+        </mat-menu>
+
+        <button mat-button [matMenuTriggerFor]="color" style=" position: relative; left:-20%">
+         
+           <mat-icon  class="material-icons-outlined">color_lens</mat-icon>
+        </button>
+       
+        <mat-menu #color="matMenu" >
+          <button mat-menu-item  (click)="changeColor('yellow',task.taskId)">Yellow</button>
+          <button mat-menu-item  (click)="changeColor('lightblue',task.taskId)">Light blue</button>
+          <button mat-menu-item (click)="changeColor('lightgreen',task.taskId)">Light green</button>
+          <button mat-menu-item (click)="changeColor('red',task.taskId)">Red</button>
+          <button mat-menu-item (click)="changeColor('white',task.taskId)">white</button>
+          <button mat-menu-item (click)="changeColor('green',task.taskId)">green</button>
+          <button mat-menu-item (click)="changeColor('pink',task.taskId)">pink</button>
+          <button mat-menu-item (click)="changeColor('orange',task.taskId)">orange</button>
+         
+        </mat-menu>
+
+        <button
+          mat-button
+          style="margin-left:-25% "
+
+          (click)="openDialog(task.taskId)"
+          matTooltip="Set Task Image"
+          color="primary"
+        >
+          <mat-icon class="material-icons-outlined">add_a_photo</mat-icon>
+        </button>
+        <button
+          mat-button
+          style=" margin-left: -5%;"
+          color="warn"
+          [matMenuTriggerFor]="beforeMenu"
+        >
+          <mat-icon class="material-icons-outlined" matTooltip="More"
+            >more_vert</mat-icon
+          >
+        </button>
+        <mat-menu #beforeMenu="matMenu" yPosition="below">
+          <button
+            mat-menu-item
+            (click)="deleteTasks(task.taskId)"
+            matTooltip="Delete task"
+          >
+            <mat-icon class="material-icons-outlined">delete</mat-icon>Delete
+          </button>
+
+          <button
+            mat-menu-item
+            (click)="updateUserTask(task.taskId, task)"
+            matTooltip="Update task"
+          >
+            <mat-icon class="material-icons-outlined">edit</mat-icon>Update
+          </button>
+          <button
+            mat-menu-item
+            (click)="archiveTasks(task.taskId)"
+            matTooltip="Hide task"
+          >
+            <mat-icon class="material-icons-outlined">hide_source</mat-icon>Hide
+            Task
+          </button>
+
+         
+
+          <mat-form-field
+            style="width: 90%"
+            class="example-chip-list"
+            appearance="legacy"
+            matTooltip="Add Label"
+          >
+            <mat-label style="margin-left: 12%; font-size: large">
+              <mat-icon class="material-icons-outlined">label</mat-icon>
+              &nbsp;&nbsp; Label
+            </mat-label>
+            <mat-chip-list #chipList aria-label="Fruit selection">
+              <mat-chip *ngFor="let fruit of fruits" (removed)="remove(fruit)">
+                {{ fruit }}
+                <button matChipRemove>
+                  <mat-icon>Cancel</mat-icon>
+                </button>
+              </mat-chip>
+              <mat-autocomplete
+                #auto="matAutocomplete"
+                (optionSelected)="selected($event, task.taskId)"
+              >
+                <mat-option
+                  *ngFor="let fruit of filteredFruits | async"
+                  [value]="fruit"
+                >
+                  {{ fruit }}
+                </mat-option>
+                <mat-option
+                  *ngFor="let f of filteredFruits1 | async"
+                  [value]="f"
+                >
+                  {{ f }}
+                </mat-option>
+                <mat-chip-list #chipList aria-label="Fruit selection">
+                  <input
+                    placeholder="Add Label.."
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [formControl]="fruitCtrl1"
+                    (matChipInputTokenEnd)="add($event)"
+                  />
+                </mat-chip-list>
+              </mat-autocomplete>
+              <input
+                type="button"
+                placeholder=""
+                #fruitInput
+                [matAutocomplete]="auto"
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [formControl]="fruitCtrl1"
+                (matChipInputTokenEnd)="add($event)"
+              />
+            </mat-chip-list>
+          </mat-form-field>
+        </mat-menu>
+      </mat-card-actions>
+    </div>
+  </mat-card>
+</div>
+
+<footer class="page-footer">
+  <pagination-controls [hidden]="totalLength<=7" class="text-center" (pageChange)="page=$event"></pagination-controls>
+</footer>
+

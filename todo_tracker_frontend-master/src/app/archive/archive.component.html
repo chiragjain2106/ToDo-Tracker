@@ -1,0 +1,40 @@
+
+<div  class="row">
+  <div style="margin-top: 6%; margin-left: 20%;" *ngIf="archiveData==''">
+    <img src="assets/images/allclear.png" alt="No Archieved Task" width="80%" height="80%">
+ </div>
+  <mat-card class="example-card" *ngFor="let task of archiveData   | paginate:{itemsPerPage:3, currentPage:page, totalItems:totalLength}"
+   style="background-color: {{task.cardColor}}" >
+  
+      <mat-card-title> {{task.taskTitle}}
+        <img
+        matTooltip="Priority"
+        src="assets/images/{{ task.priority }}.png"
+        alt=""
+        width="10%"
+        style="margin-left: 5%; position: relative"
+      />
+      </mat-card-title>
+       <mat-card-subtitle> {{task.taskDescription}}  </mat-card-subtitle>
+      <img mat-card-image src="{{task.taskImage}}">
+      <mat-chip *ngIf="task.category!=''">
+        {{task.category}}
+      </mat-chip>
+      <mat-card-subtitle> {{task.date}}  </mat-card-subtitle>
+      <mat-card-actions>
+        <button
+          mat-button
+          matTooltip="Unarchieve Task"  color="primary"
+          (click)="unArchive(task.taskId)"
+        >
+          <mat-icon class="material-icons-outlined">unarchive</mat-icon>
+        </button>
+      
+        <button mat-button color="warn" (click)="deleteTask(task.taskId)"><mat-icon class="material-icons-outlined" matTooltip="Delete Archieved Task">delete</mat-icon></button> 
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <footer class="page-footer">
+    <pagination-controls [hidden]="totalLength<=4" class="text-center" (pageChange)="page=$event"></pagination-controls>
+  </footer>
